@@ -13,7 +13,7 @@ body {
 }
 
 .login-container {
-  min-width: 187vh;
+  min-width: 200vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -30,7 +30,7 @@ body {
 }
 
 .login-box h2 {
-  color: #2563eb;
+  color: #25eb2f;
   margin-bottom: 30px;
   font-size: 22px;
 }
@@ -57,14 +57,14 @@ body {
 }
 
 .input-group input:focus {
-  border-color: #2563eb;
+  border-color: #25eb50;
   outline: none;
-  box-shadow: 0 0 4px #2563eb55;
+  box-shadow: 0 0 4px #25eb2555;
 }
 
 .login-btn {
   width: 100%;
-  background: #2563eb;
+  background: #359123;
   color: white;
   padding: 12px;
   border: none;
@@ -75,5 +75,5 @@ body {
 }
 
 .login-btn:hover {
-  background: #1e4db7;
+  background: #1eb75e;
 }
