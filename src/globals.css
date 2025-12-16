@@ -1,0 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer theme {
+  :root {
+    --primary-color: #007bff; /* Valid color; remove if unused */
+  }
+}
+
+.my-primary {
+  color: var(--primary-color);
+}
