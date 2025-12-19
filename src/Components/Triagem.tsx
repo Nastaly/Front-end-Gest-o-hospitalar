@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Plus, AlertCircle, Eye, Activity } from 'lucide-react';
+import { Plus, AlertCircle, Eye } from 'lucide-react';
 
 interface TriagemData {
   id: string;
