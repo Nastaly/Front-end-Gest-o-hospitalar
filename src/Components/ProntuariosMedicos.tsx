@@ -1,20 +1,8 @@
 import { useState } from 'react';
 import { Search, Plus, FileText, Calendar, User } from 'lucide-react';
 
-interface Prontuario {
-  id: string;
-  paciente: string;
-    pacienteId: string;
-    medico: string;
-    medicoId: string;
-    data: string;
-    diagnostico: string;
-    prescricao: string;
-    observacoes: string;
-    proximaConsulta: string;
-}   
 export function ProntuariosMedicos() {
-  const [prontuarios, setProntuarios] = useState([
+  const [prontuarios] = useState([
     {
       id: '1',
       paciente: 'Maria Santos',
@@ -144,7 +132,7 @@ export function ProntuariosMedicos() {
               <div className="grid grid-cols-2 gap-4">
                 <div>
                   <label className="block mb-2 text-gray-700">Paciente</label>
-                  <select className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                  <select className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" title="Selecionar paciente">
                     <option>Maria Santos</option>
                     <option>Carlos Oliveira</option>
                     <option>Fernanda Lima</option>
@@ -152,7 +140,7 @@ export function ProntuariosMedicos() {
                 </div>
                 <div>
                   <label className="block mb-2 text-gray-700">Médico</label>
-                  <select className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                  <select className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" title="Selecionar médico">
                     <option>Dr. João Silva</option>
                     <option>Dra. Ana Costa</option>
                     <option>Dr. Pedro Santos</option>
@@ -209,6 +197,7 @@ export function ProntuariosMedicos() {
                 <label className="block mb-2 text-gray-700">Data da Próxima Consulta</label>
                 <input
                   type="date"
+                  placeholder="DD/MM/AAAA"
                   className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 />
               </div>

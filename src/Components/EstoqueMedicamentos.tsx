@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Plus, Search, AlertTriangle, Package } from 'lucide-react';
 
 export function EstoqueMedicamentos() {
-  const [medicamentos, setMedicamentos] = useState([
+  const [medicamentos] = useState([
     {
       id: '1',
       nome: 'Dipirona 500mg',
@@ -200,6 +200,7 @@ export function EstoqueMedicamentos() {
                   <label className="block mb-2 text-gray-700">Nome do Medicamento</label>
                   <input
                     type="text"
+                    placeholder="Nome do medicamento"
                     className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   />
                 </div>
@@ -207,6 +208,7 @@ export function EstoqueMedicamentos() {
                   <label className="block mb-2 text-gray-700">Princípio Ativo</label>
                   <input
                     type="text"
+                    placeholder="Princípio ativo"
                     className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   />
                 </div>
@@ -214,12 +216,13 @@ export function EstoqueMedicamentos() {
                   <label className="block mb-2 text-gray-700">Quantidade</label>
                   <input
                     type="number"
+                    placeholder="0"
                     className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   />
                 </div>
                 <div>
                   <label className="block mb-2 text-gray-700">Unidade</label>
-                  <select className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                  <select className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" title="Selecionar unidade">
                     <option>comprimidos</option>
                     <option>cápsulas</option>
                     <option>ml</option>
@@ -231,6 +234,7 @@ export function EstoqueMedicamentos() {
                   <label className="block mb-2 text-gray-700">Estoque Mínimo</label>
                   <input
                     type="number"
+                    placeholder="0"
                     className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   />
                 </div>
@@ -238,6 +242,7 @@ export function EstoqueMedicamentos() {
                   <label className="block mb-2 text-gray-700">Lote</label>
                   <input
                     type="text"
+                    placeholder="Número do lote"
                     className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   />
                 </div>
@@ -245,6 +250,7 @@ export function EstoqueMedicamentos() {
                   <label className="block mb-2 text-gray-700">Data de Validade</label>
                   <input
                     type="date"
+                    placeholder="DD/MM/AAAA"
                     className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   />
                 </div>
@@ -252,6 +258,7 @@ export function EstoqueMedicamentos() {
                   <label className="block mb-2 text-gray-700">Fabricante</label>
                   <input
                     type="text"
+                    placeholder="Nome do fabricante"
                     className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   />
                 </div>

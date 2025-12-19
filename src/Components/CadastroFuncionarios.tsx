@@ -1,19 +1,8 @@
 import { useState } from 'react';
 import { Plus, Search, Edit, Trash2 } from 'lucide-react';
 
-interface Funcionariolog {
-  id: string;
-  nome: string;
-    cargo: string;
-    especialidade: string;
-    crm?: string;
-    coren?: string;
-    telefone: string;
-    email: string;
-    status: string;
-}
 export function CadastroFuncionarios() {
-  const [funcionarios] = useState<Funcionariolog[]>([
+  const [funcionarios, setFuncionarios] = useState([
     {
       id: '1',
       nome: 'Dr. João Silva',
@@ -48,6 +37,48 @@ export function CadastroFuncionarios() {
 
   const [showModal, setShowModal] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
+  const [formData, setFormData] = useState({
+    nome: '',
+    cargo: 'Médico',
+    especialidade: '',
+    registro: '',
+    telefone: '',
+    email: '',
+    cpf: '',
+    dataAdmissao: '',
+    endereco: ''
+  });
+
+  const handleDeleteFuncionario = (id: string) => {
+    setFuncionarios(funcionarios.filter(f => f.id !== id));
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    const newFuncionario = {
+      id: Date.now().toString(),
+      nome: formData.nome,
+      cargo: formData.cargo,
+      especialidade: formData.especialidade,
+      crm: formData.registro,
+      telefone: formData.telefone,
+      email: formData.email,
+      status: 'Ativo'
+    };
+    setFuncionarios([...funcionarios, newFuncionario]);
+    setFormData({
+      nome: '',
+      cargo: 'Médico',
+      especialidade: '',
+      registro: '',
+      telefone: '',
+      email: '',
+      cpf: '',
+      dataAdmissao: '',
+      endereco: ''
+    });
+    setShowModal(false);
+  };
 
   const filteredFuncionarios = funcionarios.filter(f =>
     f.nome.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -114,10 +145,10 @@ export function CadastroFuncionarios() {
                   </td>
                   <td className="px-6 py-4">
                     <div className="flex gap-2">
-                      <button className="p-2 text-blue-600 hover:bg-blue-50 rounded-lg">
+                      <button className="p-2 text-blue-600 hover:bg-blue-50 rounded-lg" aria-label="Editar funcionário">
                         <Edit className="w-4 h-4" />
                       </button>
-                      <button className="p-2 text-red-600 hover:bg-red-50 rounded-lg">
+                      <button onClick={() => handleDeleteFuncionario(funcionario.id)} className="p-2 text-red-600 hover:bg-red-50 rounded-lg" aria-label="Excluir funcionário">
                         <Trash2 className="w-4 h-4" />
                       </button>
                     </div>
@@ -134,18 +165,21 @@ export function CadastroFuncionarios() {
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
           <div className="bg-white rounded-lg max-w-2xl w-full p-6 max-h-[90vh] overflow-y-auto">
             <h2 className="mb-6">Novo Funcionário</h2>
-            <form className="space-y-4">
+            <form className="space-y-4" onSubmit={handleSubmit}>
               <div className="grid grid-cols-2 gap-4">
                 <div>
                   <label className="block mb-2 text-gray-700">Nome Completo</label>
                   <input
                     type="text"
+                    placeholder="Digite o nome completo"
+                    value={formData.nome}
+                    onChange={(e) => setFormData({...formData, nome: e.target.value})}
                     className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   />
                 </div>
                 <div>
                   <label className="block mb-2 text-gray-700">Cargo</label>
-                  <select className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                  <select value={formData.cargo} onChange={(e) => setFormData({...formData, cargo: e.target.value})} className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" aria-label="Selecionar cargo">
                     <option>Médico</option>
                     <option>Enfermeiro</option>
                     <option>Técnico de Enfermagem</option>
@@ -157,6 +191,9 @@ export function CadastroFuncionarios() {
                   <label className="block mb-2 text-gray-700">Especialidade</label>
                   <input
                     type="text"
+                    placeholder="Digite a especialidade"
+                    value={formData.especialidade}
+                    onChange={(e) => setFormData({...formData, especialidade: e.target.value})}
                     className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   />
                 </div>
@@ -164,6 +201,9 @@ export function CadastroFuncionarios() {
                   <label className="block mb-2 text-gray-700">CRM/COREN</label>
                   <input
                     type="text"
+                    placeholder="Número do registro"
+                    value={formData.registro}
+                    onChange={(e) => setFormData({...formData, registro: e.target.value})}
                     className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   />
                 </div>
@@ -171,6 +211,9 @@ export function CadastroFuncionarios() {
                   <label className="block mb-2 text-gray-700">Telefone</label>
                   <input
                     type="tel"
+                    placeholder="(00) 00000-0000"
+                    value={formData.telefone}
+                    onChange={(e) => setFormData({...formData, telefone: e.target.value})}
                     className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   />
                 </div>
@@ -178,6 +221,9 @@ export function CadastroFuncionarios() {
                   <label className="block mb-2 text-gray-700">Email</label>
                   <input
                     type="email"
+                    placeholder="exemplo@email.com"
+                    value={formData.email}
+                    onChange={(e) => setFormData({...formData, email: e.target.value})}
                     className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   />
                 </div>
@@ -185,6 +231,9 @@ export function CadastroFuncionarios() {
                   <label className="block mb-2 text-gray-700">CPF</label>
                   <input
                     type="text"
+                    placeholder="000.000.000-00"
+                    value={formData.cpf}
+                    onChange={(e) => setFormData({...formData, cpf: e.target.value})}
                     className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   />
                 </div>
@@ -192,6 +241,9 @@ export function CadastroFuncionarios() {
                   <label className="block mb-2 text-gray-700">Data de Admissão</label>
                   <input
                     type="date"
+                    placeholder="DD/MM/AAAA"
+                    value={formData.dataAdmissao}
+                    onChange={(e) => setFormData({...formData, dataAdmissao: e.target.value})}
                     className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   />
                 </div>
@@ -200,6 +252,9 @@ export function CadastroFuncionarios() {
                 <label className="block mb-2 text-gray-700">Endereço</label>
                 <input
                   type="text"
+                  placeholder="Rua, número, bairro, cidade"
+                  value={formData.endereco}
+                  onChange={(e) => setFormData({...formData, endereco: e.target.value})}
                   className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 />
               </div>

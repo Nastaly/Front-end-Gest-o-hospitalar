@@ -43,6 +43,10 @@ export function CadastroPacientes({ userRole = 'admin' }: { userRole?: string })
     p.cpf.includes(searchTerm)
   );
 
+  const handleDeletePaciente = (id: string) => {
+    setPacientes(pacientes.filter(p => p.id !== id));
+  };
+
   return (
     <div className="space-y-6">
       {/* Access Info for non-authorized users */}
@@ -125,7 +129,7 @@ export function CadastroPacientes({ userRole = 'admin' }: { userRole?: string })
                           <button className="p-2 text-blue-600 hover:bg-blue-50 rounded-lg" title="Editar">
                             <Edit className="w-4 h-4" />
                           </button>
-                          <button className="p-2 text-red-600 hover:bg-red-50 rounded-lg" title="Excluir">
+                          <button onClick={() => handleDeletePaciente(paciente.id)} className="p-2 text-red-600 hover:bg-red-50 rounded-lg" title="Excluir">
                             <Trash2 className="w-4 h-4" />
                           </button>
                         </>
@@ -152,6 +156,7 @@ export function CadastroPacientes({ userRole = 'admin' }: { userRole?: string })
                     <label className="block mb-2 text-gray-700">Nome Completo</label>
                     <input
                       type="text"
+                      placeholder="Digite o nome completo"
                       className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     />
                   </div>
@@ -159,6 +164,7 @@ export function CadastroPacientes({ userRole = 'admin' }: { userRole?: string })
                     <label className="block mb-2 text-gray-700">CPF</label>
                     <input
                       type="text"
+                      placeholder="000.000.000-00"
                       className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     />
                   </div>
@@ -166,6 +172,7 @@ export function CadastroPacientes({ userRole = 'admin' }: { userRole?: string })
                     <label className="block mb-2 text-gray-700">RG</label>
                     <input
                       type="text"
+                      placeholder="00.000.000-0"
                       className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     />
                   </div>
@@ -173,12 +180,13 @@ export function CadastroPacientes({ userRole = 'admin' }: { userRole?: string })
                     <label className="block mb-2 text-gray-700">Data de Nascimento</label>
                     <input
                       type="date"
+                      placeholder="DD/MM/AAAA"
                       className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     />
                   </div>
                   <div>
                     <label className="block mb-2 text-gray-700">Sexo</label>
-                    <select className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                    <select className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" title="Selecionar sexo">
                       <option>Masculino</option>
                       <option>Feminino</option>
                       <option>Outro</option>
@@ -194,6 +202,7 @@ export function CadastroPacientes({ userRole = 'admin' }: { userRole?: string })
                     <label className="block mb-2 text-gray-700">Telefone</label>
                     <input
                       type="tel"
+                      placeholder="(00) 00000-0000"
                       className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     />
                   </div>
@@ -201,6 +210,7 @@ export function CadastroPacientes({ userRole = 'admin' }: { userRole?: string })
                     <label className="block mb-2 text-gray-700">Email</label>
                     <input
                       type="email"
+                      placeholder="exemplo@email.com"
                       className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     />
                   </div>
@@ -208,6 +218,7 @@ export function CadastroPacientes({ userRole = 'admin' }: { userRole?: string })
                     <label className="block mb-2 text-gray-700">Endereço</label>
                     <input
                       type="text"
+                      placeholder="Rua, número, bairro, cidade"
                       className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     />
                   </div>
@@ -219,7 +230,7 @@ export function CadastroPacientes({ userRole = 'admin' }: { userRole?: string })
                 <div className="grid grid-cols-2 gap-4">
                   <div>
                     <label className="block mb-2 text-gray-700">Convênio</label>
-                    <select className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                    <select className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" title="Selecionar convênio">
                       <option>Particular</option>
                       <option>Unimed</option>
                       <option>Bradesco Saúde</option>
@@ -231,6 +242,7 @@ export function CadastroPacientes({ userRole = 'admin' }: { userRole?: string })
                     <label className="block mb-2 text-gray-700">Número da Carteirinha</label>
                     <input
                       type="text"
+                      placeholder="Número da carteirinha"
                       className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     />
                   </div>

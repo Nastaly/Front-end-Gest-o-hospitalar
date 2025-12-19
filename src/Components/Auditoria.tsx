@@ -1,18 +1,8 @@
-import { useState, type ChangeEvent } from 'react';
+import { useState } from 'react';
 import { Search, Calendar, Download } from 'lucide-react';
 
-interface AuditLog {
-  id: string;
-  data: string;
-  usuario: string;
-  acao: string;
-  entidade: string;
-  detalhes: string;
-  ip: string;
-}
-
 export function Auditoria() {
-  const [logs] = useState<AuditLog[]>([
+  const [logs] = useState([
     {
       id: '1',
       data: '2025-12-05 14:32:15',
@@ -78,10 +68,10 @@ export function Auditoria() {
     },
   ]);
 
-  const [searchTerm, setSearchTerm] = useState<string>('');
-  const [selectedAction, setSelectedAction] = useState<string>('Todas');
+  const [searchTerm, setSearchTerm] = useState('');
+  const [selectedAction, setSelectedAction] = useState('Todas');
 
-  const actions: string[] = ['Todas', 'Criou prontuário', 'Agendou consulta', 'Cadastrou paciente', 'Atualizou estoque'];
+  const actions = ['Todas', 'Criou prontuário', 'Agendou consulta', 'Cadastrou paciente', 'Atualizou estoque'];
 
   const filteredLogs = logs.filter(log => {
     const matchSearch = 
@@ -136,16 +126,16 @@ export function Auditoria() {
               type="text"
               placeholder="Buscar por usuário ou ação..."
               value={searchTerm}
-              onChange={(e: ChangeEvent<HTMLInputElement>) => setSearchTerm(e.target.value)}
+              onChange={(e) => setSearchTerm(e.target.value)}
               className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
             />
           </div>
           <div>
             <select
-              aria-label="Filtrar por ação"
               value={selectedAction}
-              onChange={(e: ChangeEvent<HTMLSelectElement>) => setSelectedAction(e.target.value)}
+              onChange={(e) => setSelectedAction(e.target.value)}
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              aria-label="Selecionar ação"
             >
               {actions.map(action => (
                 <option key={action} value={action}>{action}</option>

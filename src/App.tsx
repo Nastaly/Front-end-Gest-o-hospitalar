@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { Login } from 'e:/Front-end-Gest-o-hospitalar/src/Components/Login';
-import { Dashboard } from 'e:/Front-end-Gest-o-hospitalar/src/Components/Dashboard';
+import { Login } from './components/Login';
+import { Dashboard } from './components/Dashboard';
 
 export default function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);

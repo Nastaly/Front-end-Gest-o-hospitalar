@@ -34,41 +34,28 @@ export function Consultas() {
 
   const [showModal, setShowModal] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
-  const [formData, setFormData] = useState({
-    paciente: '',
-    medico: '',
-    especialidade: 'Cardiologia',
-    data: '',
-    horario: ''
-  });
+
+  const handleAddConsulta = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+    const novaConsulta = {
+      id: String(consultas.length + 1),
+      paciente: formData.get('paciente') as string,
+      medico: formData.get('medico') as string,
+      especialidade: formData.get('especialidade') as string,
+      data: formData.get('data') as string,
+      horario: formData.get('horario') as string,
+      status: 'Agendada'
+    };
+    setConsultas([...consultas, novaConsulta]);
+    setShowModal(false);
+    (e.target as HTMLFormElement).reset();
+  };
 
   const filteredConsultas = consultas.filter(c => 
     c.paciente.toLowerCase().includes(searchTerm.toLowerCase()) ||
     c.medico.toLowerCase().includes(searchTerm.toLowerCase())
   );
-
-  const handleFormChange = (e) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const newConsulta = {
-      id: (consultas.length + 1).toString(),
-      ...formData,
-      status: 'Agendada'
-    };
-    setConsultas(prev => [...prev, newConsulta]);
-    setFormData({
-      paciente: '',
-      medico: '',
-      especialidade: 'Cardiologia',
-      data: '',
-      horario: ''
-    });
-    setShowModal(false);
-  };
 
   return (
     <div className="space-y-6">
@@ -159,18 +146,16 @@ export function Consultas() {
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
           <div className="bg-white rounded-lg max-w-2xl w-full p-6">
             <h2 className="mb-6">Nova Consulta</h2>
-            <form className="space-y-4">
+            <form onSubmit={handleAddConsulta} className="space-y-4">
               <div className="grid grid-cols-2 gap-4">
                 <div>
                   <label className="block mb-2 text-gray-700">Paciente</label>
                   <input
                     type="text"
                     name="paciente"
-                    value={formData.paciente}
-                    onChange={handleFormChange}
-                    placeholder="Digite o nome do paciente"
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    placeholder="Nome do paciente"
                     required
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   />
                 </div>
                 <div>
@@ -178,21 +163,15 @@ export function Consultas() {
                   <input
                     type="text"
                     name="medico"
-                    value={formData.medico}
-                    onChange={handleFormChange}
-                    placeholder="Digite o nome do médico"
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    placeholder="Nome do médico"
                     required
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   />
                 </div>
                 <div>
                   <label className="block mb-2 text-gray-700">Especialidade</label>
-                  <select
-                    name="especialidade"
-                    value={formData.especialidade}
-                    onChange={handleFormChange}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                  >
+                  <select name="especialidade" required className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" title="Selecionar especialidade">
+                    <option value="">Selecione uma especialidade</option>
                     <option>Cardiologia</option>
                     <option>Ortopedia</option>
                     <option>Pediatria</option>
@@ -203,10 +182,8 @@ export function Consultas() {
                   <input
                     type="date"
                     name="data"
-                    value={formData.data}
-                    onChange={handleFormChange}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     required
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   />
                 </div>
                 <div>
@@ -214,10 +191,9 @@ export function Consultas() {
                   <input
                     type="time"
                     name="horario"
-                    value={formData.horario}
-                    onChange={handleFormChange}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     required
+                    title="Selecionar horário"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   />
                 </div>
               </div>

@@ -103,12 +103,13 @@ export function RegistroPacientes() {
             <label className="block mb-2 text-gray-700">Data</label>
             <input
               type="date"
+              placeholder="DD/MM/AAAA"
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
             />
           </div>
           <div>
             <label className="block mb-2 text-gray-700">Tipo</label>
-            <select className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+            <select className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" title="Selecionar tipo">
               <option>Todos</option>
               <option>Entrada</option>
               <option>Internação</option>
@@ -118,7 +119,7 @@ export function RegistroPacientes() {
           </div>
           <div>
             <label className="block mb-2 text-gray-700">Status</label>
-            <select className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+            <select className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" title="Selecionar status">
               <option>Todos</option>
               <option>Em Atendimento</option>
               <option>Internado</option>

@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Plus, Edit, Trash2 } from 'lucide-react';
 
 export function CadastroEspecialidades() {
-  const [especialidades] = useState([
+  const [especialidades, setEspecialidades] = useState([
     { id: '1', nome: 'Cardiologia', descricao: 'Tratamento de doenças do coração', medicos: 5 },
     { id: '2', nome: 'Ortopedia', descricao: 'Tratamento de ossos e articulações', medicos: 3 },
     { id: '3', nome: 'Pediatria', descricao: 'Atendimento infantil', medicos: 4 },
@@ -11,6 +11,19 @@ export function CadastroEspecialidades() {
   ]);
 
   const [showModal, setShowModal] = useState(false);
+  const [formData, setFormData] = useState({ nome: '', descricao: '' });
+
+  const handleAddEspecialidade = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (formData.nome.trim()) {
+      setEspecialidades([
+        ...especialidades,
+        { id: String(Date.now()), nome: formData.nome, descricao: formData.descricao, medicos: 0 },
+      ]);
+      setFormData({ nome: '', descricao: '' });
+      setShowModal(false);
+    }
+  };
 
   return (
     <div className="space-y-6">
@@ -46,11 +59,11 @@ export function CadastroEspecialidades() {
             </div>
 
             <div className="flex gap-2">
-              <button type="button" className="flex-1 flex items-center justify-center gap-2 py-2 border border-blue-600 text-blue-600 rounded-lg hover:bg-blue-50 transition-colors">
+              <button className="flex-1 flex items-center justify-center gap-2 py-2 border border-blue-600 text-blue-600 rounded-lg hover:bg-blue-50 transition-colors">
                 <Edit className="w-4 h-4" />
                 Editar
               </button>
-              <button type="button" aria-label="Deletar especialidade" className="p-2 border border-red-600 text-red-600 rounded-lg hover:bg-red-50 transition-colors">
+              <button className="p-2 border border-red-600 text-red-600 rounded-lg hover:bg-red-50 transition-colors" title="Excluir">
                 <Trash2 className="w-4 h-4" />
               </button>
             </div>
@@ -63,11 +76,13 @@ export function CadastroEspecialidades() {
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
           <div className="bg-white rounded-lg max-w-xl w-full p-6">
             <h2 className="mb-6">Nova Especialidade</h2>
-            <form className="space-y-4">
+            <form className="space-y-4" onSubmit={handleAddEspecialidade}>
               <div>
                 <label className="block mb-2 text-gray-700">Nome da Especialidade</label>
                 <input
                   type="text"
+                  value={formData.nome}
+                  onChange={(e) => setFormData({ ...formData, nome: e.target.value })}
                   className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   placeholder="Ex: Endocrinologia"
                 />
@@ -76,6 +91,8 @@ export function CadastroEspecialidades() {
                 <label className="block mb-2 text-gray-700">Descrição</label>
                 <textarea
                   rows={3}
+                  value={formData.descricao}
+                  onChange={(e) => setFormData({ ...formData, descricao: e.target.value })}
                   className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   placeholder="Descreva a especialidade..."
                 />

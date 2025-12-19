@@ -241,6 +241,7 @@ export function Triagem({ readOnly = false }: { readOnly?: boolean }) {
                 <label className="block mb-2 text-gray-700">Paciente *</label>
                 <input
                   type="text"
+                  placeholder="Nome do paciente"
                   value={formData.paciente}
                   onChange={(e) => setFormData({...formData, paciente: e.target.value})}
                   className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
@@ -252,6 +253,7 @@ export function Triagem({ readOnly = false }: { readOnly?: boolean }) {
                 <label className="block mb-2 text-gray-700">Sintomas *</label>
                 <textarea
                   rows={3}
+                  placeholder="Descreva os sintomas"
                   value={formData.sintomas}
                   onChange={(e) => setFormData({...formData, sintomas: e.target.value})}
                   className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
@@ -315,6 +317,7 @@ export function Triagem({ readOnly = false }: { readOnly?: boolean }) {
                   value={formData.prioridade}
                   onChange={(e) => setFormData({...formData, prioridade: e.target.value})}
                   className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  title="Selecionar prioridade"
                   required
                 >
                   <option value="Baixa">Baixa</option>
@@ -437,4 +440,4 @@ export function Triagem({ readOnly = false }: { readOnly?: boolean }) {
       )}
     </div>
   );
-} 
+}
