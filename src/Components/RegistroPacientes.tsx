@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Calendar, Clock, User, FileText } from 'lucide-react';
 
 export function RegistroPacientes() {
-  const [registros, setRegistros] = useState([
+  const [registros] = useState([
     {
       id: '1',
       paciente: 'Maria Santos',
