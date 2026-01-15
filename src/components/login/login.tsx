@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { Activity, AlertCircle } from 'lucide-react';
+import { useState } from "react";
+import { Activity, AlertCircle } from "lucide-react";
 
 interface LoginProps {
   onLogin: (user: any) => void;
@@ -9,43 +9,43 @@ interface LoginProps {
 function resolveUser(accessCode: string) {
   const code = accessCode.toUpperCase();
 
-  if (code.startsWith('ADMIN')) {
-    return { role: 'admin', name: 'Administrador' };
+  if (code.startsWith("ADMIN")) {
+    return { role: "admin", name: "Administrador" };
   }
 
-  if (code.startsWith('MED')) {
-    return { role: 'medico', name: 'Médico' };
+  if (code.startsWith("MED")) {
+    return { role: "medico", name: "Médico" };
   }
 
-  if (code.startsWith('ENF')) {
-    return { role: 'enfermeiro', name: 'Enfermeiro' };
+  if (code.startsWith("ENF")) {
+    return { role: "enfermeiro", name: "Enfermeiro" };
   }
 
-  if (code.startsWith('REC')) {
-    return { role: 'recepcao', name: 'Recepção' };
+  if (code.startsWith("REC")) {
+    return { role: "recepcao", name: "Recepção" };
   }
 
   return null;
 }
 
 export function Login({ onLogin }: LoginProps) {
-  const [accessCode, setAccessCode] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
+  const [accessCode, setAccessCode] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    setError('');
+    setError("");
 
     if (!accessCode || !password) {
-      setError('Por favor, preencha todos os campos');
+      setError("Por favor, preencha todos os campos");
       return;
     }
 
     const userInfo = resolveUser(accessCode);
 
     if (!userInfo) {
-      setError('Código de acesso inválido');
+      setError("Código de acesso inválido");
       return;
     }
 
@@ -54,14 +54,13 @@ export function Login({ onLogin }: LoginProps) {
       id: accessCode,
       accessCode,
       name: userInfo.name,
-      role: userInfo.role
+      role: userInfo.role,
     });
   };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-blue-100 flex items-center justify-center p-4">
       <div className="bg-white rounded-lg shadow-xl w-full max-w-md p-8">
-        
         {/* Logo */}
         <div className="flex items-center justify-center mb-8">
           <div className="bg-blue-600 p-3 rounded-full">
@@ -120,33 +119,6 @@ export function Login({ onLogin }: LoginProps) {
             Entrar
           </button>
         </form>
-
-        {/* Info */}
-        <div className="mt-6 p-4 bg-gray-50 rounded-lg">
-          <p className="text-gray-700 mb-3">Perfis disponíveis:</p>
-          <div className="text-sm space-y-2">
-            <div className="flex justify-between">
-              <span className="text-purple-700">ADMINxxx</span>
-              <span className="text-gray-600">Administrador</span>
-            </div>
-            <div className="flex justify-between">
-              <span className="text-blue-700">MEDxxx</span>
-              <span className="text-gray-600">Médico</span>
-            </div>
-            <div className="flex justify-between">
-              <span className="text-green-700">ENFxxx</span>
-              <span className="text-gray-600">Enfermeiro</span>
-            </div>
-            <div className="flex justify-between">
-              <span className="text-orange-700">RECxxx</span>
-              <span className="text-gray-600">Recepção</span>
-            </div>
-          </div>
-
-          <p className="text-gray-500 text-xs mt-3">
-            Qualquer senha é aceite (modo demonstração)
-          </p>
-        </div>
       </div>
     </div>
   );
