@@ -1,20 +1,24 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Login from "./components/login/login";
-import Cadastro from "./components/cadastro/cadastro";
-import Home from "./components/home/home";
+import { useState } from "react";
+import { Login } from "./components/login/login";
+import { Dashboard } from "./components/Dashboard";
 
-function App() {
-  return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/login" element={<Login />} />
+export default function App() {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [currentUser, setCurrentUser] = useState<any>(null);
 
-        <Route path="/cadastro" element={<Cadastro />} />
+  const handleLogin = (user: any) => {
+    setIsAuthenticated(true);
+    setCurrentUser(user);
+  };
 
-        <Route path="/home" element={<Home />} />
-      </Routes>
-    </BrowserRouter>
-  );
+  const handleLogout = () => {
+    setIsAuthenticated(false);
+    setCurrentUser(null);
+  };
+
+  if (!isAuthenticated) {
+    return <Login onLogin={handleLogin} />;
+  }
+
+  return <Dashboard user={currentUser} onLogout={handleLogout} />;
 }
-
-export default App;
